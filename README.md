@@ -57,6 +57,7 @@ and the DNS provider to be used
 ### Secret
 
 - Create a `Secret` containing as key parameter the concatenation of the Godaddy Api and Secret separated by ":"
+- to be clear, don't include the placeholder < > characters in the stringData of the token
 ```yaml
 cat <<EOF > secret.yml
 apiVersion: v1
