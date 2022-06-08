@@ -1,0 +1,20 @@
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows service account "cert-manager" to read secrets and everything else in all namespaces.
+# You need to already have the default rbac ClusterRole named "cluster-admin". if you don't then start with the 
+# enabling of rbac and go from there
+#
+# i applied this as a hammer when i noticed the cert-manager service account complaining of permissions issues
+# the root cause wouldn't have been fixed by this but it's here to use if you need it
+kind: RoleBinding
+metadata:
+  name: cert-manager
+  # fairly sure the namespace is gratuitous since this is a cluster role
+  namespace: cert-manager
+subjects:
+- kind: ServiceAccount
+  name: cert-manager # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io
